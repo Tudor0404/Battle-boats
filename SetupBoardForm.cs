@@ -39,12 +39,11 @@ namespace Battle_boats {
 
         private void playAgainstAIForm_Load(object sender, EventArgs e) {
             setupValues();
-
-
         }
 
         private void setupValues() {
             boatsOnBoard.Clear();
+            setupBoardTable.Controls.Clear();
             FormLogic.displayBoard(ref setupTableLabels, ref setupBoardTable, setupTableLabel_Click, setupTableLabel_MouseEnter, setupTableLabel_MouseLeave);
 
             boatsListDataGrid.Rows.Clear();

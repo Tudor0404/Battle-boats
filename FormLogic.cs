@@ -10,7 +10,11 @@ using System.Windows.Forms;
 
 namespace Battle_boats {
     class FormLogic {
-        static public void displayBoard(ref Label[,] labelList, ref TableLayoutPanel boardTable, Action<object, EventArgs> mouseClickEvent, Action<object, EventArgs> mouseEnterEvent, Action<object, EventArgs> mouseLeaveEvent) {
+        private readonly BackgroundWorker worker;
+
+        public FormLogic() {
+        }
+        public void displayBoard(ref Label[,] labelList, ref TableLayoutPanel boardTable, Action<object, EventArgs> mouseClickEvent, Action<object, EventArgs> mouseEnterEvent, Action<object, EventArgs> mouseLeaveEvent) {
             // Add an empty label on each cell outside the existing labels to make the checkerboard pattern.
             // Also adds a click/hover event when trying add Boats on the Board.
             // type 0 = setup, 1 = ingame
