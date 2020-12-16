@@ -162,7 +162,7 @@ namespace Battle_boats {
             this.boatAddColumn,
             this.boatRemoveColumn});
             this.boatsListDataGrid.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.boatsListDataGrid.Location = new System.Drawing.Point(7, 330);
+            this.boatsListDataGrid.Location = new System.Drawing.Point(7, 348);
             this.boatsListDataGrid.Margin = new System.Windows.Forms.Padding(2);
             this.boatsListDataGrid.MultiSelect = false;
             this.boatsListDataGrid.Name = "boatsListDataGrid";
@@ -307,7 +307,7 @@ namespace Battle_boats {
             // boatDirectionButton
             // 
             this.boatDirectionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.boatDirectionButton.Location = new System.Drawing.Point(361, 299);
+            this.boatDirectionButton.Location = new System.Drawing.Point(361, 317);
             this.boatDirectionButton.Name = "boatDirectionButton";
             this.boatDirectionButton.Size = new System.Drawing.Size(113, 26);
             this.boatDirectionButton.TabIndex = 9;
@@ -320,7 +320,7 @@ namespace Battle_boats {
             this.directionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.directionLabel.AutoSize = true;
             this.directionLabel.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.directionLabel.Location = new System.Drawing.Point(358, 281);
+            this.directionLabel.Location = new System.Drawing.Point(358, 299);
             this.directionLabel.Name = "directionLabel";
             this.directionLabel.Size = new System.Drawing.Size(101, 15);
             this.directionLabel.TabIndex = 10;
@@ -331,7 +331,7 @@ namespace Battle_boats {
             this.placementStatusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.placementStatusLabel.AutoSize = true;
             this.placementStatusLabel.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.placementStatusLabel.Location = new System.Drawing.Point(12, 305);
+            this.placementStatusLabel.Location = new System.Drawing.Point(12, 323);
             this.placementStatusLabel.Name = "placementStatusLabel";
             this.placementStatusLabel.Size = new System.Drawing.Size(0, 15);
             this.placementStatusLabel.TabIndex = 11;
@@ -339,7 +339,7 @@ namespace Battle_boats {
             // unselectBoatButton
             // 
             this.unselectBoatButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.unselectBoatButton.Location = new System.Drawing.Point(242, 299);
+            this.unselectBoatButton.Location = new System.Drawing.Point(242, 317);
             this.unselectBoatButton.Name = "unselectBoatButton";
             this.unselectBoatButton.Size = new System.Drawing.Size(113, 26);
             this.unselectBoatButton.TabIndex = 12;
@@ -364,7 +364,7 @@ namespace Battle_boats {
             this.setupPanel.Controls.Add(this.boatsListDataGrid);
             this.setupPanel.Location = new System.Drawing.Point(0, 27);
             this.setupPanel.Name = "setupPanel";
-            this.setupPanel.Size = new System.Drawing.Size(634, 523);
+            this.setupPanel.Size = new System.Drawing.Size(634, 522);
             this.setupPanel.TabIndex = 13;
             // 
             // SetupBoardForm
