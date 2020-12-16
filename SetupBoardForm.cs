@@ -45,11 +45,6 @@ namespace Battle_boats {
 
         private void setupValues() {
             boatsOnBoard.Clear();
-
-            setupPanel.BringToFront();
-            setupPanel.Visible = true;
-            playPanel.Visible = false;
-
             FormLogic.displayBoard(ref setupTableLabels, ref setupBoardTable, setupTableLabel_Click, setupTableLabel_MouseEnter, setupTableLabel_MouseLeave);
 
             boatsListDataGrid.Rows.Clear();
