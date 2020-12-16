@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 /* 
  * BUGS:
@@ -18,67 +19,38 @@ using System.Windows.Forms;
 
 
 namespace Battle_boats {
-    public partial class playAgainstAIForm : Form {
-        public playAgainstAIForm() {
+    public partial class SetupBoardForm : Form {
+        public SetupBoardForm(int Type) {
+            type = Type; // 0 == AI     1 == Local
             InitializeComponent();
         }
 
-        public Label[,] boardLabel = new Label[10, 10];
         private GameLogic game = new GameLogic();
-        List<GameLogic.Boat> boatsOnBoard = new List<GameLogic.Boat>();
+
+        int type;
+
+        static public Label[,] setupTableLabels = new Label[10, 10];
+        static List<GameLogic.Boat> boatsOnBoard = new List<GameLogic.Boat>();
 
         // boat index selected related to the gamelogic possible boats
-        int currentBoatIndex = -1;
-        bool isLocationSuitable = true;
+        static public int currentBoatIndex = -1;
+        static public bool isLocationSuitable = true;
+
 
         private void playAgainstAIForm_Load(object sender, EventArgs e) {
             setupValues();
+
+
         }
 
         private void setupValues() {
             boatsOnBoard.Clear();
-            // allow to add items to the table later on
-            this.Controls.Add(boardSetupTable);
-            boardSetupTable.Controls.Clear();
 
-            // Add an empty label on each cell outside the existing labels to make the checkerboard pattern.
-            // Also adds a click/hover event when trying add Boats on the Board.
-            string alpha = "ABCDEFGHIJ";
+            setupPanel.BringToFront();
+            setupPanel.Visible = true;
+            playPanel.Visible = false;
 
-            for (int col = 0; col < 11; col++) {
-                for (int row = 0; row < 11; row++) {
-                    var labelTemp = new Label();
-                    labelTemp.Dock = DockStyle.Fill;
-                    labelTemp.TextAlign = ContentAlignment.MiddleCenter;
-                    labelTemp.AutoSize = true;
-                    labelTemp.Font = new Font("Roboto", 10, FontStyle.Regular);
-                    labelTemp.Margin = new Padding(0);
-                    if ((col + row) % 2 == 0) {
-                        labelTemp.BackColor = Color.LightGray;
-                    } else {
-                        labelTemp.BackColor = Color.White;
-                    }
-
-                    if (col == 0) {
-                        if (row != 0)
-                            labelTemp.Text = row.ToString();
-                    } else if (row == 0) {
-                        if (col != 0)
-                            labelTemp.Text = alpha[col - 1].ToString();
-                    } else {
-                        // col, row and default color
-                        labelTemp.Name = $"{col - 1}.{row - 1}.{labelTemp.BackColor.Name}";
-
-                        labelTemp.Click += new EventHandler(tableLabel_Click);
-                        labelTemp.MouseEnter += new EventHandler(tableLabel_MouseEnter);
-                        labelTemp.MouseLeave += new EventHandler(tableLabel_MouseLeave);
-
-                        boardLabel[col - 1, row - 1] = labelTemp;
-                    }
-
-                    boardSetupTable.Controls.Add(labelTemp, col, row);
-                }
-            }
+            FormLogic.displayBoard(ref setupTableLabels, ref setupBoardTable, setupTableLabel_Click, setupTableLabel_MouseEnter, setupTableLabel_MouseLeave);
 
             boatsListDataGrid.Rows.Clear();
             // set the DataGridView to the possible boats, also styles to rows, red not placed, green = placed
@@ -102,7 +74,7 @@ namespace Battle_boats {
         }
 
         // places boats on the board
-        private void tableLabel_Click(object sender, EventArgs e) {
+        private void setupTableLabel_Click(object sender, EventArgs e) {
             Label lbl = sender as Label;
 
             // check if ghost image had trouble rendering
@@ -132,18 +104,18 @@ namespace Battle_boats {
 
                             if (boatDirectionButton.Text == GameLogic.Direction.Horizontal.ToString()) {
 
-                                boardLabel[tempInt[0] + i, tempInt[1]].BackColor = GameLogic.possibleBoats[currentBoatIndex].color;
+                                setupTableLabels[tempInt[0] + i, tempInt[1]].BackColor = GameLogic.possibleBoats[currentBoatIndex].color;
                                 if (GameLogic.possibleBoats[currentBoatIndex].color.Name.ToString().Substring(0, 2) == "ff")
-                                    boardLabel[tempInt[0] + i, tempInt[1]].Name = $"{tempInt[0] + i}.{tempInt[1]}.#{GameLogic.possibleBoats[currentBoatIndex].color.Name}";
+                                    setupTableLabels[tempInt[0] + i, tempInt[1]].Name = $"{tempInt[0] + i}.{tempInt[1]}.#{GameLogic.possibleBoats[currentBoatIndex].color.Name}";
                                 else
-                                    boardLabel[tempInt[0] + i, tempInt[1]].Name = $"{tempInt[0] + i}.{tempInt[1]}.{GameLogic.possibleBoats[currentBoatIndex].color.Name}";
+                                    setupTableLabels[tempInt[0] + i, tempInt[1]].Name = $"{tempInt[0] + i}.{tempInt[1]}.{GameLogic.possibleBoats[currentBoatIndex].color.Name}";
                             } else {
 
-                                boardLabel[tempInt[0], tempInt[1] + i].BackColor = GameLogic.possibleBoats[currentBoatIndex].color;
+                                setupTableLabels[tempInt[0], tempInt[1] + i].BackColor = GameLogic.possibleBoats[currentBoatIndex].color;
                                 if (GameLogic.possibleBoats[currentBoatIndex].color.Name.ToString().Substring(0, 2) == "ff")
-                                    boardLabel[tempInt[0], tempInt[1] + i].Name = $"{tempInt[0]}.{tempInt[1] + i}.#{GameLogic.possibleBoats[currentBoatIndex].color.Name}";
+                                    setupTableLabels[tempInt[0], tempInt[1] + i].Name = $"{tempInt[0]}.{tempInt[1] + i}.#{GameLogic.possibleBoats[currentBoatIndex].color.Name}";
                                 else
-                                    boardLabel[tempInt[0], tempInt[1] + i].Name = $"{tempInt[0]}.{tempInt[1] + i}.{GameLogic.possibleBoats[currentBoatIndex].color.Name}";
+                                    setupTableLabels[tempInt[0], tempInt[1] + i].Name = $"{tempInt[0]}.{tempInt[1] + i}.{GameLogic.possibleBoats[currentBoatIndex].color.Name}";
                             }
                         }
                     } else {
@@ -159,6 +131,21 @@ namespace Battle_boats {
             }
         }
 
+        // changes the background color to the default one set
+        private void setupTableLabel_MouseLeave(object sender, EventArgs e) {
+            if (currentBoatIndex != -1) {
+                clearGhostCells();
+            }
+        }
+
+        // remove temporary colors of labels
+        private void clearGhostCells() {
+            foreach (var cell in setupTableLabels) {
+                cell.BackColor = ColorTranslator.FromHtml(cell.Name.Split('.')[2]);
+            }
+
+        }
+
         private void unselectBoat() {
             currentBoatIndex = -1;
             placementStatusLabel.Text = "";
@@ -167,7 +154,7 @@ namespace Battle_boats {
         }
 
         // shows the user where the user where the boat would be placed
-        private void tableLabel_MouseEnter(object sender, EventArgs e) {
+        private void setupTableLabel_MouseEnter(object sender, EventArgs e) {
 
             if (currentBoatIndex > -1) {
                 var lbl = sender as Label;
@@ -182,7 +169,7 @@ namespace Battle_boats {
                     if (boatDirectionButton.Text == GameLogic.Direction.Horizontal.ToString()) {
 
                         try {
-                            boardLabel[lblCoords[0] + i, lblCoords[1]].BackColor = GameLogic.possibleBoats[currentBoatIndex].color;
+                            setupTableLabels[lblCoords[0] + i, lblCoords[1]].BackColor = GameLogic.possibleBoats[currentBoatIndex].color;
                         } catch {
                             // if it can't draw, that mean it is out of bounds
                             isLocationSuitable = false;
@@ -190,27 +177,13 @@ namespace Battle_boats {
                     } else {
 
                         try {
-                            boardLabel[lblCoords[0], lblCoords[1] + i].BackColor = GameLogic.possibleBoats[currentBoatIndex].color;
+                            setupTableLabels[lblCoords[0], lblCoords[1] + i].BackColor = GameLogic.possibleBoats[currentBoatIndex].color;
                         } catch {
                             // if it can't draw, that mean it is out of bounds
                             isLocationSuitable = false;
                         }
                     }
                 }
-            }
-        }
-
-        // changes the background color to the default one set
-        private void tableLabel_MouseLeave(object sender, EventArgs e) {
-            if (currentBoatIndex != -1) {
-                clearGhostCells();
-            }
-        }
-
-        // remove temporary colors of labels
-        private void clearGhostCells() {
-            foreach (var cell in boardLabel) {
-                cell.BackColor = System.Drawing.ColorTranslator.FromHtml(cell.Name.Split('.')[2]);
             }
         }
 
@@ -246,15 +219,6 @@ namespace Battle_boats {
             checkStart();
         }
 
-        // checks if the game is able to be started
-        private void checkStart() {
-            if (boatsOnBoard.Count == GameLogic.possibleBoats.Count) {
-                startGameButton.Enabled = true;
-            } else {
-                startGameButton.Enabled = false;
-            }
-        }
-
         private void unselectBoatButton_Click(object sender, EventArgs e) {
             unselectBoat();
         }
@@ -283,11 +247,11 @@ namespace Battle_boats {
                     // gets the boat with the index selected and goes through all of the coords, reseting them to the default
                     var boatToRemove = boatsOnBoard.Find(x => x.index == (int)boatsListDataGrid.Rows[e.RowIndex].Cells[0].Value);
                     foreach (var coord in boatToRemove.coords) {
-                        var tempString = boardLabel[coord.col, coord.row].Name.Split('.');
+                        var tempString = setupTableLabels[coord.col, coord.row].Name.Split('.');
                         if ((coord.col + coord.row) % 2 == 0) {
-                            boardLabel[coord.col, coord.row].Name = $"{tempString[0]}.{tempString[1]}.LightGray";
+                            setupTableLabels[coord.col, coord.row].Name = $"{tempString[0]}.{tempString[1]}.LightGray";
                         } else {
-                            boardLabel[coord.col, coord.row].Name = $"{tempString[0]}.{tempString[1]}.White";
+                            setupTableLabels[coord.col, coord.row].Name = $"{tempString[0]}.{tempString[1]}.White";
                         }
                     }
 
@@ -308,6 +272,15 @@ namespace Battle_boats {
                 setupValues();
             } else {
                 modalForm.Dispose();
+            }
+        }
+        
+        // checks if the game is able to be started
+        private void checkStart() {
+            if (boatsOnBoard.Count == GameLogic.possibleBoats.Count) {
+                startGameButton.Enabled = true;
+            } else {
+                startGameButton.Enabled = false;
             }
         }
     }

@@ -55,6 +55,7 @@
     <Compile Include="BoatModalForm.Designer.cs">
       <DependentUpon>BoatModalForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormLogic.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="GameLogic.cs" />
     <Compile Include="MenuForm.cs">
@@ -63,17 +64,23 @@
     <Compile Include="MenuForm.Designer.cs">
       <DependentUpon>MenuForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PlayAIForm.cs">
+    <Compile Include="PlayForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PlayAIForm.Designer.cs">
-      <DependentUpon>PlayAIForm.cs</DependentUpon>
+    <Compile Include="PlayForm.Designer.cs">
+      <DependentUpon>PlayForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PlayLocalForm.cs">
+    <Compile Include="SetupBoardForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PlayLocalForm.Designer.cs">
-      <DependentUpon>PlayLocalForm.cs</DependentUpon>
+    <Compile Include="SetupBoardForm.Designer.cs">
+      <DependentUpon>SetupBoardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LocalConnectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LocalConnectForm.Designer.cs">
+      <DependentUpon>LocalConnectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LeaderboardForm.cs">
       <SubType>Form</SubType>
@@ -89,11 +96,14 @@
     <EmbeddedResource Include="MenuForm.resx">
       <DependentUpon>MenuForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PlayAIForm.resx">
-      <DependentUpon>PlayAIForm.cs</DependentUpon>
+    <EmbeddedResource Include="PlayForm.resx">
+      <DependentUpon>PlayForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PlayLocalForm.resx">
-      <DependentUpon>PlayLocalForm.cs</DependentUpon>
+    <EmbeddedResource Include="SetupBoardForm.resx">
+      <DependentUpon>SetupBoardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LocalConnectForm.resx">
+      <DependentUpon>LocalConnectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LeaderboardForm.resx">
       <DependentUpon>LeaderboardForm.cs</DependentUpon>
