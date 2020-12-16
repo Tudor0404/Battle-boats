@@ -20,10 +20,6 @@ using System.Diagnostics;
 
 namespace Battle_boats {
     public partial class SetupBoardForm : Form {
-        public SetupBoardForm(int Type) {
-            type = Type; // 0 == AI     1 == Local
-            InitializeComponent();
-        }
 
         private GameLogic game = new GameLogic();
 
@@ -32,19 +28,37 @@ namespace Battle_boats {
         static public Label[,] setupTableLabels = new Label[10, 10];
         static List<GameLogic.Boat> boatsOnBoard = new List<GameLogic.Boat>();
 
+        private DisplayBoard playerDisplay;
+        private readonly BackgroundWorker worker;
+
+
         // boat index selected related to the gamelogic possible boats
         static public int currentBoatIndex = -1;
         static public bool isLocationSuitable = true;
 
+        public SetupBoardForm(int Type) {
+            type = Type; // 0 == AI     1 == Local
+            playerDisplay = new DisplayBoard(setSetupBoard, setupTableLabel_Click, setupTableLabel_MouseEnter, setupTableLabel_MouseLeave);
+            InitializeComponent();
+        }
 
         private void playAgainstAIForm_Load(object sender, EventArgs e) {
             setupValues();
         }
 
+        #region board update
+        private void setSetupBoard(int col, int row, Label lbl) {
+            setupBoardTable.Controls.Add(lbl, col, row);
+            if (!(col - 1 < 0 || row - 1< 0))
+                setupTableLabels[col - 1, row - 1] = lbl;
+        }
+
+        #endregion
+
         private void setupValues() {
             boatsOnBoard.Clear();
             setupBoardTable.Controls.Clear();
-            FormLogic.displayBoard(ref setupTableLabels, ref setupBoardTable, setupTableLabel_Click, setupTableLabel_MouseEnter, setupTableLabel_MouseLeave);
+             playerDisplay.displayBoard();
 
             boatsListDataGrid.Rows.Clear();
             // set the DataGridView to the possible boats, also styles to rows, red not placed, green = placed

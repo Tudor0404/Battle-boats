@@ -16,6 +16,7 @@ namespace Battle_boats {
         private Label[,] playerTableLabels = new Label[10, 10];
         private Label[,] opponentTableLabels = new Label[10, 10];
 
+        private DisplayBoard playerDisplay;
 
         private bool selectingShot = false;
 
@@ -23,12 +24,28 @@ namespace Battle_boats {
 
         public PlayForm() {
             InitializeComponent();
+            playerDisplay = new DisplayBoard(setPlayerBoard, playTableLabel_MouseClick, playTableLabel_MouseEnter, playTableLabel_MouseLeave);
+            playerDisplay = new DisplayBoard(setOpponentBoard, playTableLabel_MouseClick, playTableLabel_MouseEnter, playTableLabel_MouseLeave);
         }
 
         private void PlayForm_Load(object sender, EventArgs e) {
-            FormLogic.displayBoard(ref playerTableLabels, ref playerBoardTable, playTableLabel_MouseClick, playTableLabel_MouseEnter, playTableLabel_MouseLeave);
-            FormLogic.displayBoard(ref opponentTableLabels, ref opponentBoardTable, playTableLabel_MouseClick, playTableLabel_MouseEnter, playTableLabel_MouseLeave);
         }
+
+        #region update Boards
+
+        private void setPlayerBoard(int col, int row, Label lbl) {
+            playerBoardTable.Controls.Add(lbl, col, row);
+            playerTableLabels[col, row] = lbl;
+
+        }
+
+        private void setOpponentBoard(int col, int row, Label lbl) {
+            opponentBoardTable.Controls.Add(lbl, col, row);
+            opponentTableLabels[col, row] = lbl;
+        }
+
+
+        #endregion
 
         private void playTableLabel_MouseClick(object sender, EventArgs e) {
             return;

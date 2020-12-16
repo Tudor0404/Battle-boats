@@ -55,7 +55,7 @@
     <Compile Include="BoatModalForm.Designer.cs">
       <DependentUpon>BoatModalForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormLogic.cs" />
+    <Compile Include="DisplayBoard.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="GameLogic.cs" />
     <Compile Include="MenuForm.cs">

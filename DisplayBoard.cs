@@ -9,16 +9,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Battle_boats {
-    class FormLogic {
+    class DisplayBoard {
         private readonly BackgroundWorker worker;
 
-        public FormLogic() {
+        public DisplayBoard(Action<int, int, Label> setBoard, Action<object, EventArgs> mouseClickEvent, Action<object, EventArgs> mouseEnterEvent, Action<object, EventArgs> mouseLeaveEvent) {            
+            worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
+            worker.DoWork += (sender, e) => displayBoardWork(sender, e, mouseClickEvent,  mouseEnterEvent,  mouseLeaveEvent);
+            worker.ProgressChanged += (sender, e) => displayBoardProgressChanged(sender, e, setBoard);
         }
-        public void displayBoard(ref Label[,] labelList, ref TableLayoutPanel boardTable, Action<object, EventArgs> mouseClickEvent, Action<object, EventArgs> mouseEnterEvent, Action<object, EventArgs> mouseLeaveEvent) {
-            // Add an empty label on each cell outside the existing labels to make the checkerboard pattern.
-            // Also adds a click/hover event when trying add Boats on the Board.
-            // type 0 = setup, 1 = ingame
 
+        public void displayBoard() {
+            // Asynchronously update the board when needed
+            worker.RunWorkerAsync();
+        }
+
+        private void displayBoardWork(object sender, DoWorkEventArgs e, Action<object, EventArgs> mouseClickEvent, Action<object, EventArgs> mouseEnterEvent, Action<object, EventArgs> mouseLeaveEvent) {
+            var bgWorker = sender as BackgroundWorker; 
+            
             string alpha = "ABCDEFGHIJ";
 
             for (int col = 0; col < 11; col++) {
@@ -49,12 +57,21 @@ namespace Battle_boats {
                         labelTemp.MouseEnter += new EventHandler(mouseEnterEvent);
                         labelTemp.MouseLeave += new EventHandler(mouseLeaveEvent);
 
-                        labelList[col - 1, row - 1] = labelTemp;
                     }
-
-                    boardTable.Controls.Add(labelTemp, col, row);
+                    bgWorker.ReportProgress(1, new Response { col = col, row = row, lbl = labelTemp});
                 }
             }
+        }
+
+        private void displayBoardProgressChanged(object sender, ProgressChangedEventArgs e, Action<int, int, Label> setBoard) {
+            Response response = (Response)e.UserState;
+            setBoard(response.col, response.row, response.lbl);
+        }
+
+        struct Response {
+            public int col;
+            public int row;
+            public Label lbl;
         }
     }
 }
