@@ -26,21 +26,22 @@ namespace Battle_boats {
         private void InitializeComponent() {
             this.playPanel = new System.Windows.Forms.Panel();
             this.logLabel = new System.Windows.Forms.Label();
-            this.logList = new System.Windows.Forms.ListBox();
             this.opponentBoardLabel = new System.Windows.Forms.Label();
             this.yourBoardLabel = new System.Windows.Forms.Label();
             this.opponentBoardTable = new System.Windows.Forms.TableLayoutPanel();
             this.playerBoardTable = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logListView = new System.Windows.Forms.ListView();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playPanel.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // playPanel
             // 
+            this.playPanel.Controls.Add(this.logListView);
             this.playPanel.Controls.Add(this.logLabel);
-            this.playPanel.Controls.Add(this.logList);
             this.playPanel.Controls.Add(this.opponentBoardLabel);
             this.playPanel.Controls.Add(this.yourBoardLabel);
             this.playPanel.Controls.Add(this.opponentBoardTable);
@@ -53,47 +54,35 @@ namespace Battle_boats {
             // logLabel
             // 
             this.logLabel.AutoSize = true;
-            this.logLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logLabel.Location = new System.Drawing.Point(7, 341);
             this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(36, 19);
+            this.logLabel.Size = new System.Drawing.Size(36, 20);
             this.logLabel.TabIndex = 12;
             this.logLabel.Text = "Log";
-            // 
-            // logList
-            // 
-            this.logList.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logList.FormattingEnabled = true;
-            this.logList.ItemHeight = 15;
-            this.logList.Location = new System.Drawing.Point(11, 363);
-            this.logList.Name = "logList";
-            this.logList.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.logList.Size = new System.Drawing.Size(282, 154);
-            this.logList.TabIndex = 11;
             // 
             // opponentBoardLabel
             // 
             this.opponentBoardLabel.AutoSize = true;
-            this.opponentBoardLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.opponentBoardLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.opponentBoardLabel.Location = new System.Drawing.Point(341, 19);
             this.opponentBoardLabel.Name = "opponentBoardLabel";
-            this.opponentBoardLabel.Size = new System.Drawing.Size(133, 19);
+            this.opponentBoardLabel.Size = new System.Drawing.Size(136, 20);
             this.opponentBoardLabel.TabIndex = 10;
             this.opponentBoardLabel.Text = "Opponent\'s board";
             // 
             // yourBoardLabel
             // 
             this.yourBoardLabel.AutoSize = true;
-            this.yourBoardLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.yourBoardLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.yourBoardLabel.Location = new System.Drawing.Point(7, 19);
             this.yourBoardLabel.Name = "yourBoardLabel";
-            this.yourBoardLabel.Size = new System.Drawing.Size(86, 19);
+            this.yourBoardLabel.Size = new System.Drawing.Size(88, 20);
             this.yourBoardLabel.TabIndex = 9;
             this.yourBoardLabel.Text = "Your board";
             // 
             // opponentBoardTable
             // 
-            this.opponentBoardTable.AutoSize = true;
             this.opponentBoardTable.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.opponentBoardTable.ColumnCount = 11;
             this.opponentBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
@@ -106,7 +95,7 @@ namespace Battle_boats {
             this.opponentBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.opponentBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.opponentBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.opponentBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.opponentBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.opponentBoardTable.Location = new System.Drawing.Point(345, 40);
             this.opponentBoardTable.Margin = new System.Windows.Forms.Padding(2);
             this.opponentBoardTable.Name = "opponentBoardTable";
@@ -128,7 +117,6 @@ namespace Battle_boats {
             // 
             // playerBoardTable
             // 
-            this.playerBoardTable.AutoSize = true;
             this.playerBoardTable.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.playerBoardTable.ColumnCount = 11;
             this.playerBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
@@ -141,7 +129,7 @@ namespace Battle_boats {
             this.playerBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.playerBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.playerBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.playerBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.playerBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.playerBoardTable.Location = new System.Drawing.Point(11, 40);
             this.playerBoardTable.Margin = new System.Windows.Forms.Padding(2);
             this.playerBoardTable.Name = "playerBoardTable";
@@ -173,9 +161,30 @@ namespace Battle_boats {
             // 
             // gameToolStripMenuItem
             // 
+            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem});
             this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
             this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.gameToolStripMenuItem.Text = "Game";
+            // 
+            // logListView
+            // 
+            this.logListView.FullRowSelect = true;
+            this.logListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.logListView.HideSelection = false;
+            this.logListView.Location = new System.Drawing.Point(11, 364);
+            this.logListView.MultiSelect = false;
+            this.logListView.Name = "logListView";
+            this.logListView.Size = new System.Drawing.Size(278, 156);
+            this.logListView.TabIndex = 13;
+            this.logListView.UseCompatibleStateImageBehavior = false;
+            this.logListView.View = System.Windows.Forms.View.Details;
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Text = "Save";
             // 
             // PlayForm
             // 
@@ -203,12 +212,13 @@ namespace Battle_boats {
 
         private System.Windows.Forms.Panel playPanel;
         private System.Windows.Forms.Label logLabel;
-        private System.Windows.Forms.ListBox logList;
         private System.Windows.Forms.Label opponentBoardLabel;
         private System.Windows.Forms.Label yourBoardLabel;
         private System.Windows.Forms.TableLayoutPanel opponentBoardTable;
         private System.Windows.Forms.TableLayoutPanel playerBoardTable;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
+        private System.Windows.Forms.ListView logListView;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
     }
 }

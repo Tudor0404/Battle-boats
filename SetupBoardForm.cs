@@ -20,11 +20,6 @@ using System.Diagnostics;
 
 namespace Battle_boats {
     public partial class SetupBoardForm : Form {
-
-        private GameLogic game = new GameLogic();
-
-        int type;
-
         static public Label[,] setupTableLabels = new Label[10, 10];
         static List<GameLogic.Boat> boatsOnBoard = new List<GameLogic.Boat>();
 
@@ -36,8 +31,7 @@ namespace Battle_boats {
         static public int currentBoatIndex = -1;
         static public bool isLocationSuitable = true;
 
-        public SetupBoardForm(int Type) {
-            type = Type; // 0 == AI     1 == Local
+        public SetupBoardForm() {
             playerDisplay = new DisplayBoard(setSetupBoard, setupTableLabel_Click, setupTableLabel_MouseEnter, setupTableLabel_MouseLeave);
             InitializeComponent();
         }
@@ -58,7 +52,7 @@ namespace Battle_boats {
         private void setupValues() {
             boatsOnBoard.Clear();
             setupBoardTable.Controls.Clear();
-             playerDisplay.displayBoard();
+            playerDisplay.displayBoard();
 
             boatsListDataGrid.Rows.Clear();
             // set the DataGridView to the possible boats, also styles to rows, red not placed, green = placed
@@ -290,6 +284,33 @@ namespace Battle_boats {
             } else {
                 startGameButton.Enabled = false;
             }
+        }
+
+        private void startGameButton_Click(object sender, EventArgs e) {
+            // set the game type and AI diffulty
+            var gameType = new GameLogic.GameTypes();
+            var AIDifficulty = new GameLogic.AILevels();
+            if (gameSettingsTabs.SelectedTab == gameSettingsTabs.TabPages["AITabPage"]) {
+                gameType = GameLogic.GameTypes.AI;
+                if (easyAIRadio.Checked) {
+                    AIDifficulty = GameLogic.AILevels.Easy;
+                } else if (regularAIRadio.Checked) {
+                    AIDifficulty = GameLogic.AILevels.Regular;
+                } else {
+                    AIDifficulty = GameLogic.AILevels.Hard;
+                }
+            } else {
+                gameType = GameLogic.GameTypes.Local;
+                AIDifficulty = GameLogic.AILevels.None;
+            }
+
+            // create new form
+            var newForm = new PlayForm(gameType, AIDifficulty);
+            newForm.Location = this.Location;
+            newForm.StartPosition = FormStartPosition.Manual;
+            newForm.FormClosing += delegate { this.Show(); };
+            newForm.Show();
+            this.Hide();
         }
     }
 }

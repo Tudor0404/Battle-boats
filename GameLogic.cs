@@ -14,6 +14,16 @@ public class GameLogic {
         new Boat("Destroyer", 2, Color.DarkGreen, 4)
     };
     public enum Direction { Vertical, Horizontal };
+    public enum GameTypes { AI, Local};
+    public GameTypes gameType;
+    public enum AILevels {None, Easy, Regular, Hard};
+    public AILevels AILevel;
+
+    public GameLogic(GameTypes type, AILevels Difficulty = AILevels.None) {
+        // type 0 == AI, 1 == Local
+        gameType = type;
+        AILevel = Difficulty;
+    }
 
     // function to set the possible boats, also checks if the boats go out of the board, and if 0 < boats.count < 9
     static public String[] setPossibleBoats(List<Boat> boats) {

@@ -34,8 +34,9 @@ namespace Battle_boats {
                     var labelTemp = new Label();
                     labelTemp.Dock = DockStyle.Fill;
                     labelTemp.TextAlign = ContentAlignment.MiddleCenter;
-                    labelTemp.AutoSize = true;
+                    labelTemp.AutoSize = false;
                     labelTemp.Font = new Font("Roboto", 10, FontStyle.Regular);
+
                     labelTemp.Margin = new Padding(0);
                     if ((col + row) % 2 == 0) {
                         labelTemp.BackColor = Color.LightGray;

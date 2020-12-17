@@ -1,47 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Battle_boats {
     public partial class PlayForm : Form {
-
-        #region Ingame variables
-
         private Label[,] playerTableLabels = new Label[10, 10];
         private Label[,] opponentTableLabels = new Label[10, 10];
 
         private DisplayBoard playerDisplay;
+        private DisplayBoard opponentDisplay;
 
         private bool selectingShot = false;
 
-        #endregion
+        GameLogic game;
+        private string playerName;
 
-        public PlayForm() {
+        public PlayForm(GameLogic.GameTypes Type, GameLogic.AILevels Difficuly, string Name = "Player") {
             InitializeComponent();
+            game = new GameLogic(Type, Difficuly);
+            playerName = Name;
+
+            // make listVIew look like a listBox
+            logListView.Columns.Add("", -2);
+
             playerDisplay = new DisplayBoard(setPlayerBoard, playTableLabel_MouseClick, playTableLabel_MouseEnter, playTableLabel_MouseLeave);
-            playerDisplay = new DisplayBoard(setOpponentBoard, playTableLabel_MouseClick, playTableLabel_MouseEnter, playTableLabel_MouseLeave);
+            opponentDisplay = new DisplayBoard(setOpponentBoard, playTableLabel_MouseClick, playTableLabel_MouseEnter, playTableLabel_MouseLeave);
         }
 
         private void PlayForm_Load(object sender, EventArgs e) {
+            setupValues();
+
+            if (game.gameType == GameLogic.GameTypes.AI)
+                writeToLog($"Game started, {playerName} vs AI level {game.AILevel}");
+            else
+                writeToLog($"Local game started");
+
+            for (int i = 0; i < 40; i++) {
+                writeToLog(i.ToString());
+            }
+        }
+
+        private void setupValues() {
+            playerDisplay.displayBoard();
+            opponentDisplay.displayBoard();
         }
 
         #region update Boards
 
         private void setPlayerBoard(int col, int row, Label lbl) {
             playerBoardTable.Controls.Add(lbl, col, row);
-            playerTableLabels[col, row] = lbl;
+            if (!(col - 1 < 0 || row - 1 < 0))
+                playerTableLabels[col - 1, row - 1] = lbl;
 
         }
 
         private void setOpponentBoard(int col, int row, Label lbl) {
             opponentBoardTable.Controls.Add(lbl, col, row);
-            opponentTableLabels[col, row] = lbl;
+            if (!(col - 1 < 0 || row - 1 < 0))
+                opponentTableLabels[col - 1, row - 1] = lbl;
         }
 
 
@@ -67,6 +83,16 @@ namespace Battle_boats {
                 cell.BackColor = ColorTranslator.FromHtml(cell.Name.Split('.')[2]);
             }
 
+        }
+
+        private void writeToLog(string line) {
+            ListViewItem temp = new ListViewItem();
+            temp.Text = line;
+            if (logListView.Items.Count % 2 == 0)
+                temp.BackColor = Color.LightGray;
+            else
+                temp.BackColor = Color.White;
+            logListView.Items.Add(temp);
         }
     }
 }
