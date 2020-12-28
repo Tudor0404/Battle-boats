@@ -52,11 +52,11 @@ namespace Battle_boats {
             this.gameSettingsTabs = new System.Windows.Forms.TabControl();
             this.AITabPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.hardAIRadio = new System.Windows.Forms.RadioButton();
+            this.regularAIRadio = new System.Windows.Forms.RadioButton();
+            this.easyAIRadio = new System.Windows.Forms.RadioButton();
             this.localTabPage = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
-            this.easyAIRadio = new System.Windows.Forms.RadioButton();
-            this.regularAIRadio = new System.Windows.Forms.RadioButton();
-            this.hardAIRadio = new System.Windows.Forms.RadioButton();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.boatsListDataGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -76,8 +76,8 @@ namespace Battle_boats {
             this.boatsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(634, 24);
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip.Size = new System.Drawing.Size(845, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -86,13 +86,13 @@ namespace Battle_boats {
             this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadToolStripMenuItem});
             this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
-            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.gameToolStripMenuItem.Text = "Game";
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.loadToolStripMenuItem.Text = "Load";
             // 
             // boatsToolStripMenuItem
@@ -102,61 +102,63 @@ namespace Battle_boats {
             this.saveBoatsToolStripMenuItem,
             this.loadBoatsToolStripMenuItem});
             this.boatsToolStripMenuItem.Name = "boatsToolStripMenuItem";
-            this.boatsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.boatsToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
             this.boatsToolStripMenuItem.Text = "Boats";
             // 
             // changeBoatsToolStripMenuItem
             // 
             this.changeBoatsToolStripMenuItem.Name = "changeBoatsToolStripMenuItem";
-            this.changeBoatsToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.changeBoatsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.changeBoatsToolStripMenuItem.Text = "Change boats";
             this.changeBoatsToolStripMenuItem.Click += new System.EventHandler(this.changeBoatsToolStripMenuItem_Click);
             // 
             // saveBoatsToolStripMenuItem
             // 
             this.saveBoatsToolStripMenuItem.Name = "saveBoatsToolStripMenuItem";
-            this.saveBoatsToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.saveBoatsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.saveBoatsToolStripMenuItem.Text = "Save boats";
+            this.saveBoatsToolStripMenuItem.Click += new System.EventHandler(this.saveBoatsToolStripMenuItem_Click);
             // 
             // loadBoatsToolStripMenuItem
             // 
             this.loadBoatsToolStripMenuItem.Name = "loadBoatsToolStripMenuItem";
-            this.loadBoatsToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.loadBoatsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.loadBoatsToolStripMenuItem.Text = "Load boats";
+            this.loadBoatsToolStripMenuItem.Click += new System.EventHandler(this.loadBoatsToolStripMenuItem_Click);
             // 
             // setupBoardTable
             // 
             this.setupBoardTable.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.setupBoardTable.ColumnCount = 11;
-            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.setupBoardTable.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
-            this.setupBoardTable.Location = new System.Drawing.Point(0, 20);
+            this.setupBoardTable.Location = new System.Drawing.Point(0, 25);
             this.setupBoardTable.Margin = new System.Windows.Forms.Padding(0);
-            this.setupBoardTable.MinimumSize = new System.Drawing.Size(260, 260);
+            this.setupBoardTable.MinimumSize = new System.Drawing.Size(347, 320);
             this.setupBoardTable.Name = "setupBoardTable";
             this.setupBoardTable.RowCount = 11;
-            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.setupBoardTable.Size = new System.Drawing.Size(275, 275);
+            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.setupBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.setupBoardTable.Size = new System.Drawing.Size(367, 338);
             this.setupBoardTable.TabIndex = 1;
             this.setupBoardTable.TabStop = true;
             // 
@@ -176,8 +178,8 @@ namespace Battle_boats {
             this.boatRemoveColumn});
             this.boatsListDataGrid.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.boatsListDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.boatsListDataGrid.Location = new System.Drawing.Point(2, 335);
-            this.boatsListDataGrid.Margin = new System.Windows.Forms.Padding(2);
+            this.boatsListDataGrid.Location = new System.Drawing.Point(3, 413);
+            this.boatsListDataGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.boatsListDataGrid.MultiSelect = false;
             this.boatsListDataGrid.Name = "boatsListDataGrid";
             this.boatsListDataGrid.RowHeadersVisible = false;
@@ -186,7 +188,7 @@ namespace Battle_boats {
             this.boatsListDataGrid.RowTemplate.ReadOnly = true;
             this.boatsListDataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.boatsListDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.boatsListDataGrid.Size = new System.Drawing.Size(376, 220);
+            this.boatsListDataGrid.Size = new System.Drawing.Size(501, 272);
             this.boatsListDataGrid.TabIndex = 2;
             this.boatsListDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.boatsListDataGrid_CellContentClick);
             this.boatsListDataGrid.SelectionChanged += new System.EventHandler(this.boatsListDataGrid_SelectionChanged);
@@ -248,10 +250,9 @@ namespace Battle_boats {
             this.AIDifficultyLabel.AutoSize = true;
             this.AIDifficultyLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AIDifficultyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AIDifficultyLabel.Location = new System.Drawing.Point(2, 0);
-            this.AIDifficultyLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.AIDifficultyLabel.Location = new System.Drawing.Point(3, 0);
             this.AIDifficultyLabel.Name = "AIDifficultyLabel";
-            this.AIDifficultyLabel.Size = new System.Drawing.Size(159, 26);
+            this.AIDifficultyLabel.Size = new System.Drawing.Size(213, 33);
             this.AIDifficultyLabel.TabIndex = 3;
             this.AIDifficultyLabel.Text = "AI Difficulty";
             this.AIDifficultyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -261,10 +262,10 @@ namespace Battle_boats {
             this.startGameButton.AutoSize = true;
             this.startGameButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.startGameButton.Enabled = false;
-            this.startGameButton.Location = new System.Drawing.Point(508, 505);
-            this.startGameButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 15);
+            this.startGameButton.Location = new System.Drawing.Point(679, 623);
+            this.startGameButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 18);
             this.startGameButton.Name = "startGameButton";
-            this.startGameButton.Size = new System.Drawing.Size(124, 37);
+            this.startGameButton.Size = new System.Drawing.Size(163, 46);
             this.startGameButton.TabIndex = 6;
             this.startGameButton.Text = "START";
             this.startGameButton.UseVisualStyleBackColor = true;
@@ -274,9 +275,10 @@ namespace Battle_boats {
             // 
             this.setupBoardLabel.AutoSize = true;
             this.setupBoardLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.setupBoardLabel.Location = new System.Drawing.Point(3, 0);
+            this.setupBoardLabel.Location = new System.Drawing.Point(4, 0);
+            this.setupBoardLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.setupBoardLabel.Name = "setupBoardLabel";
-            this.setupBoardLabel.Size = new System.Drawing.Size(88, 20);
+            this.setupBoardLabel.Size = new System.Drawing.Size(108, 25);
             this.setupBoardLabel.TabIndex = 8;
             this.setupBoardLabel.Text = "Your board";
             // 
@@ -288,7 +290,7 @@ namespace Battle_boats {
             this.directionLabel.Location = new System.Drawing.Point(0, 0);
             this.directionLabel.Margin = new System.Windows.Forms.Padding(0);
             this.directionLabel.Name = "directionLabel";
-            this.directionLabel.Size = new System.Drawing.Size(120, 21);
+            this.directionLabel.Size = new System.Drawing.Size(161, 26);
             this.directionLabel.TabIndex = 10;
             this.directionLabel.Text = "Direction of boat";
             this.directionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -298,9 +300,10 @@ namespace Battle_boats {
             this.placementStatusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.placementStatusLabel.AutoSize = true;
             this.placementStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.placementStatusLabel.Location = new System.Drawing.Point(3, 317);
+            this.placementStatusLabel.Location = new System.Drawing.Point(4, 391);
+            this.placementStatusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.placementStatusLabel.Name = "placementStatusLabel";
-            this.placementStatusLabel.Size = new System.Drawing.Size(0, 16);
+            this.placementStatusLabel.Size = new System.Drawing.Size(0, 20);
             this.placementStatusLabel.TabIndex = 11;
             // 
             // tableLayoutPanel1
@@ -316,13 +319,14 @@ namespace Battle_boats {
             this.tableLayoutPanel1.Controls.Add(this.startGameButton, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.gameSettingsTabs, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 28);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(634, 557);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(845, 687);
             this.tableLayoutPanel1.TabIndex = 14;
             // 
             // boatFlowPanel
@@ -332,9 +336,10 @@ namespace Battle_boats {
             this.boatFlowPanel.Controls.Add(this.setupBoardTable);
             this.boatFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.boatFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.boatFlowPanel.Location = new System.Drawing.Point(3, 3);
+            this.boatFlowPanel.Location = new System.Drawing.Point(4, 4);
+            this.boatFlowPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.boatFlowPanel.Name = "boatFlowPanel";
-            this.boatFlowPanel.Size = new System.Drawing.Size(374, 300);
+            this.boatFlowPanel.Size = new System.Drawing.Size(499, 369);
             this.boatFlowPanel.TabIndex = 0;
             // 
             // boatButtonTable
@@ -345,7 +350,8 @@ namespace Battle_boats {
             this.boatButtonTable.Controls.Add(this.boatDirectionButton, 0, 1);
             this.boatButtonTable.Controls.Add(this.unselectBoatButton, 0, 3);
             this.boatButtonTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.boatButtonTable.Location = new System.Drawing.Point(383, 336);
+            this.boatButtonTable.Location = new System.Drawing.Point(511, 415);
+            this.boatButtonTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.boatButtonTable.Name = "boatButtonTable";
             this.boatButtonTable.RowCount = 5;
             this.boatButtonTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
@@ -353,15 +359,16 @@ namespace Battle_boats {
             this.boatButtonTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.boatButtonTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.boatButtonTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.boatButtonTable.Size = new System.Drawing.Size(120, 218);
+            this.boatButtonTable.Size = new System.Drawing.Size(161, 268);
             this.boatButtonTable.TabIndex = 13;
             // 
             // boatDirectionButton
             // 
             this.boatDirectionButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.boatDirectionButton.Location = new System.Drawing.Point(3, 24);
+            this.boatDirectionButton.Location = new System.Drawing.Point(4, 30);
+            this.boatDirectionButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.boatDirectionButton.Name = "boatDirectionButton";
-            this.boatDirectionButton.Size = new System.Drawing.Size(114, 37);
+            this.boatDirectionButton.Size = new System.Drawing.Size(153, 45);
             this.boatDirectionButton.TabIndex = 9;
             this.boatDirectionButton.Text = "Horizontal";
             this.boatDirectionButton.UseVisualStyleBackColor = true;
@@ -370,9 +377,10 @@ namespace Battle_boats {
             // unselectBoatButton
             // 
             this.unselectBoatButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.unselectBoatButton.Location = new System.Drawing.Point(3, 88);
+            this.unselectBoatButton.Location = new System.Drawing.Point(4, 109);
+            this.unselectBoatButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.unselectBoatButton.Name = "unselectBoatButton";
-            this.unselectBoatButton.Size = new System.Drawing.Size(114, 37);
+            this.unselectBoatButton.Size = new System.Drawing.Size(153, 45);
             this.unselectBoatButton.TabIndex = 12;
             this.unselectBoatButton.Text = "Unselect booat";
             this.unselectBoatButton.UseVisualStyleBackColor = true;
@@ -385,19 +393,21 @@ namespace Battle_boats {
             this.gameSettingsTabs.Controls.Add(this.AITabPage);
             this.gameSettingsTabs.Controls.Add(this.localTabPage);
             this.gameSettingsTabs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gameSettingsTabs.Location = new System.Drawing.Point(383, 3);
+            this.gameSettingsTabs.Location = new System.Drawing.Point(511, 4);
+            this.gameSettingsTabs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gameSettingsTabs.Name = "gameSettingsTabs";
             this.gameSettingsTabs.SelectedIndex = 0;
-            this.gameSettingsTabs.Size = new System.Drawing.Size(248, 300);
+            this.gameSettingsTabs.Size = new System.Drawing.Size(330, 369);
             this.gameSettingsTabs.TabIndex = 14;
             // 
             // AITabPage
             // 
             this.AITabPage.Controls.Add(this.tableLayoutPanel2);
-            this.AITabPage.Location = new System.Drawing.Point(4, 22);
+            this.AITabPage.Location = new System.Drawing.Point(4, 25);
+            this.AITabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.AITabPage.Name = "AITabPage";
-            this.AITabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.AITabPage.Size = new System.Drawing.Size(240, 274);
+            this.AITabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AITabPage.Size = new System.Drawing.Size(322, 340);
             this.AITabPage.TabIndex = 0;
             this.AITabPage.Text = "AI";
             this.AITabPage.UseVisualStyleBackColor = true;
@@ -412,7 +422,8 @@ namespace Battle_boats {
             this.tableLayoutPanel2.Controls.Add(this.regularAIRadio, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.easyAIRadio, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 4);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 6;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
@@ -421,16 +432,59 @@ namespace Battle_boats {
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(234, 268);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(314, 332);
             this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // hardAIRadio
+            // 
+            this.hardAIRadio.AutoSize = true;
+            this.hardAIRadio.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hardAIRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hardAIRadio.Location = new System.Drawing.Point(3, 101);
+            this.hardAIRadio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.hardAIRadio.Name = "hardAIRadio";
+            this.hardAIRadio.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.hardAIRadio.Size = new System.Drawing.Size(213, 29);
+            this.hardAIRadio.TabIndex = 7;
+            this.hardAIRadio.Text = "Hard";
+            this.hardAIRadio.UseVisualStyleBackColor = true;
+            // 
+            // regularAIRadio
+            // 
+            this.regularAIRadio.AutoSize = true;
+            this.regularAIRadio.Checked = true;
+            this.regularAIRadio.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.regularAIRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.regularAIRadio.Location = new System.Drawing.Point(3, 68);
+            this.regularAIRadio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.regularAIRadio.Name = "regularAIRadio";
+            this.regularAIRadio.Size = new System.Drawing.Size(213, 29);
+            this.regularAIRadio.TabIndex = 5;
+            this.regularAIRadio.TabStop = true;
+            this.regularAIRadio.Text = "Regular";
+            this.regularAIRadio.UseVisualStyleBackColor = true;
+            // 
+            // easyAIRadio
+            // 
+            this.easyAIRadio.AutoSize = true;
+            this.easyAIRadio.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.easyAIRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.easyAIRadio.Location = new System.Drawing.Point(3, 35);
+            this.easyAIRadio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.easyAIRadio.Name = "easyAIRadio";
+            this.easyAIRadio.Size = new System.Drawing.Size(213, 29);
+            this.easyAIRadio.TabIndex = 4;
+            this.easyAIRadio.Text = "Easy";
+            this.easyAIRadio.UseVisualStyleBackColor = true;
             // 
             // localTabPage
             // 
             this.localTabPage.Controls.Add(this.label1);
-            this.localTabPage.Location = new System.Drawing.Point(4, 22);
+            this.localTabPage.Location = new System.Drawing.Point(4, 25);
+            this.localTabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.localTabPage.Name = "localTabPage";
-            this.localTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.localTabPage.Size = new System.Drawing.Size(240, 274);
+            this.localTabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.localTabPage.Size = new System.Drawing.Size(323, 340);
             this.localTabPage.TabIndex = 1;
             this.localTabPage.Text = "Local";
             this.localTabPage.UseVisualStyleBackColor = true;
@@ -440,66 +494,25 @@ namespace Battle_boats {
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 3);
+            this.label1.Location = new System.Drawing.Point(4, 4);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(146, 24);
+            this.label1.Size = new System.Drawing.Size(190, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Not available yet";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // easyAIRadio
-            // 
-            this.easyAIRadio.AutoSize = true;
-            this.easyAIRadio.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.easyAIRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.easyAIRadio.Location = new System.Drawing.Point(2, 28);
-            this.easyAIRadio.Margin = new System.Windows.Forms.Padding(2);
-            this.easyAIRadio.Name = "easyAIRadio";
-            this.easyAIRadio.Size = new System.Drawing.Size(159, 22);
-            this.easyAIRadio.TabIndex = 4;
-            this.easyAIRadio.Text = "Easy";
-            this.easyAIRadio.UseVisualStyleBackColor = true;
-            // 
-            // regularAIRadio
-            // 
-            this.regularAIRadio.AutoSize = true;
-            this.regularAIRadio.Checked = true;
-            this.regularAIRadio.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.regularAIRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.regularAIRadio.Location = new System.Drawing.Point(2, 54);
-            this.regularAIRadio.Margin = new System.Windows.Forms.Padding(2);
-            this.regularAIRadio.Name = "regularAIRadio";
-            this.regularAIRadio.Size = new System.Drawing.Size(159, 22);
-            this.regularAIRadio.TabIndex = 5;
-            this.regularAIRadio.TabStop = true;
-            this.regularAIRadio.Text = "Regular";
-            this.regularAIRadio.UseVisualStyleBackColor = true;
-            // 
-            // hardAIRadio
-            // 
-            this.hardAIRadio.AutoSize = true;
-            this.hardAIRadio.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hardAIRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hardAIRadio.Location = new System.Drawing.Point(2, 80);
-            this.hardAIRadio.Margin = new System.Windows.Forms.Padding(2);
-            this.hardAIRadio.Name = "hardAIRadio";
-            this.hardAIRadio.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.hardAIRadio.Size = new System.Drawing.Size(159, 22);
-            this.hardAIRadio.TabIndex = 7;
-            this.hardAIRadio.Text = "Hard";
-            this.hardAIRadio.UseVisualStyleBackColor = true;
-            // 
             // SetupBoardForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(634, 581);
+            this.ClientSize = new System.Drawing.Size(845, 715);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(650, 620);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MinimumSize = new System.Drawing.Size(861, 752);
             this.Name = "SetupBoardForm";
             this.Text = "Play against AI";
             this.Load += new System.EventHandler(this.playAgainstAIForm_Load);

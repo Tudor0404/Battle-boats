@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 /* 
  * BUGS:
@@ -24,7 +25,6 @@ namespace Battle_boats {
         static List<GameLogic.Boat> boatsOnBoard = new List<GameLogic.Boat>();
 
         private DisplayBoard playerDisplay;
-        private readonly BackgroundWorker worker;
 
 
         // boat index selected related to the gamelogic possible boats
@@ -287,7 +287,7 @@ namespace Battle_boats {
         }
 
         private void startGameButton_Click(object sender, EventArgs e) {
-            // set the game type and AI diffulty
+            // set the game type and AI difficulty
             var gameType = new GameLogic.GameTypes();
             var AIDifficulty = new GameLogic.AILevels();
             if (gameSettingsTabs.SelectedTab == gameSettingsTabs.TabPages["AITabPage"]) {
@@ -311,6 +311,16 @@ namespace Battle_boats {
             newForm.FormClosing += delegate { this.Show(); };
             newForm.Show();
             this.Hide();
+        }
+
+        private void saveBoatsToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (GameLogic.saveBoats())
+                setupValues();
+        }
+
+        private void loadBoatsToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (GameLogic.loadBoats())
+                setupValues();
         }
     }
 }

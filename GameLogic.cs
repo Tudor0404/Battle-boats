@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-
-
+using System.Windows.Forms;
 public class GameLogic {
     Random rand = new Random();
     static public List<Boat> possibleBoats = new List<Boat>{
@@ -14,11 +15,14 @@ public class GameLogic {
         new Boat("Destroyer", 2, Color.DarkGreen, 4)
     };
     public enum Direction { Vertical, Horizontal };
-    public enum GameTypes { AI, Local};
+    public enum GameTypes { AI, Local };
     public GameTypes gameType;
-    public enum AILevels {None, Easy, Regular, Hard};
+    public enum AILevels { None, Easy, Regular, Hard };
     public AILevels AILevel;
 
+    // game loop tracking
+    public enum GameLoop { RequestShot, CheckShot, CheckIfWon, GiveResponse, SwitchPlayer };
+    private GameLoop currentEvent = GameLoop.RequestShot;
     public GameLogic(GameTypes type, AILevels Difficulty = AILevels.None) {
         // type 0 == AI, 1 == Local
         gameType = type;
@@ -82,6 +86,70 @@ public class GameLogic {
         return true;
     }
 
+    // save boats
+    static public bool saveBoats() {
+
+        // serialise all the boats to json
+        string jsonString = JsonConvert.SerializeObject(possibleBoats);
+        // save a file dialog to get path
+        SaveFileDialog saveBoatsDialog = new SaveFileDialog();
+        saveBoatsDialog.Filter = "Text File|*.txt";
+        saveBoatsDialog.Title = "Save Current Boats to a File";
+        saveBoatsDialog.ShowDialog();
+
+        // check if file path is valid, and delete it if it already exists
+        if (saveBoatsDialog.FileName != "") {
+
+            if (File.Exists(saveBoatsDialog.FileName))
+                File.Delete(saveBoatsDialog.FileName);
+
+            // save the serialised string
+            File.WriteAllText(saveBoatsDialog.FileName, jsonString);
+
+            return true;
+
+        }
+
+        MessageBox.Show("Invalid file selected", "Error");
+        return false;
+    }
+
+    // load boats
+
+    static public bool loadBoats() {
+
+        // open a file dialog to get path
+        OpenFileDialog loadBoatsDialog = new OpenFileDialog();
+        loadBoatsDialog.Filter = "Text File|*.txt";
+        loadBoatsDialog.Title = "Load  Boats from a File";
+        loadBoatsDialog.Multiselect = false;
+        loadBoatsDialog.ShowDialog();
+
+        if (loadBoatsDialog.FileName != "") {
+
+            // open file and deserialise
+            string jsonString = File.ReadAllText(loadBoatsDialog.FileName);
+            List<Boat> boats = JsonConvert.DeserializeObject<List<Boat>>(jsonString);
+            string[] response = setPossibleBoats(boats);
+
+            // return response
+            if (response[0] == "true") {
+                return true;
+            } else {
+                MessageBox.Show(response[1], "Error");
+                return false;
+            }
+        }
+
+        MessageBox.Show("Invalid file selected", "Error");
+        return false;
+    }
+
+    // AI player
+    public class AI {
+
+    }
+
     // Boat class to store 
     public class Boat {
         public Boat(string Name, int Length, Color color_, int Index) {
@@ -112,7 +180,7 @@ public class GameLogic {
             }
         }
         public Direction direc { get; set; }
-        // calculates the coords of the boat by looping by how many length there are,
+        // calculates the coords of the boat by looping by how many sections there are,
         // and adding/subtracting the Coord depending on the direction
         public List<Coords> coords {
             get {
@@ -130,12 +198,8 @@ public class GameLogic {
         }
     }
 
-    // AI player
-    public class AI {
-
-    }
-
     // coordinates structure base on the board, first comes the column then the row
+
     public struct Coords {
         public Coords(int Col, int Row) {
             col = Col;
@@ -149,7 +213,6 @@ public class GameLogic {
             string alpha = "ABCDEFGHIJ";
             return $"{alpha[col]}{row + 1}";
         }
-
         public bool Equals(Coords other) {
             if (this.col == other.col && this.row == other.row) {
                 return true;

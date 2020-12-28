@@ -15,6 +15,11 @@ namespace Battle_boats {
             InitializeComponent();
         }
         private void BoatModalForm_Load(object sender, EventArgs e) {
+            setupValues();
+        }
+
+        private void setupValues() {
+            boatsListDataGrid.Rows.Clear();
 
             boatsListDataGrid.ClearSelection();
             boatsListDataGrid.CurrentCell = null;
@@ -66,12 +71,21 @@ namespace Battle_boats {
         }
 
         private void setBoatsButton_Click(object sender, EventArgs e) {
+
+            // exit modal, and refresh main page
+            if (checkBoats())
+                this.DialogResult = DialogResult.OK;
+        }
+
+        // check if boats are valid
+        private bool checkBoats() {
+
             var tempBoatList = new List<GameLogic.Boat>();
             if (boatsListDataGrid.Rows.Count > 8 || boatsListDataGrid.Rows.Count == 0) {
                 MessageBox.Show("A minimum of 1 and a maximum of 8 boats can be set");
-                return;
+                return false;
             }
-                
+
             for (int i = 0; i < boatsListDataGrid.Rows.Count; i++) {
                 var tempRow = boatsListDataGrid.Rows[i];
 
@@ -79,38 +93,50 @@ namespace Battle_boats {
                 try {
                     if (tempRow.Cells[0].Value.ToString().Length < 3) {
                         MessageBox.Show($"Row {i + 1} name '{tempRow.Cells[0].Value}' is too short");
-                        return;
+                        return false;
                     }
                 } catch {
                     MessageBox.Show($"Row {i + 1} has no name");
-                    return;
+                    return false;
                 }
 
                 // check length
                 if (int.Parse(tempRow.Cells[1].Value.ToString()) < 0 || int.Parse(tempRow.Cells[1].Value.ToString()) > 10) {
                     MessageBox.Show($"Row {i + 1} length '{tempRow.Cells[1].Value}' should be between 1 and 10");
-                    return;
+                    return false;
                 }
 
                 // check color
                 var tempButton = tempRow.Cells[2] as DataGridViewButtonCell;
                 if (tempButton.Style.BackColor.IsEmpty) {
                     MessageBox.Show($"Row {i + 1} color has not been chosen yet");
-                    return;
+                    return false;
                 }
 
                 tempBoatList.Add(new GameLogic.Boat(tempRow.Cells[0].Value.ToString(), int.Parse(tempRow.Cells[1].Value.ToString()), tempButton.Style.BackColor, i));
             }
 
-            // exit modal, and refresh main page
             if (GameLogic.setPossibleBoats(tempBoatList)[0] == "true") {
-                this.DialogResult = DialogResult.OK;
+                return true;
             }
+
+            return false;
         }
 
         // exit modal
         private void exitButton_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (GameLogic.saveBoats())
+                if (checkBoats())
+                    setupValues();
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (GameLogic.loadBoats())
+                setupValues();
         }
     }
 }
