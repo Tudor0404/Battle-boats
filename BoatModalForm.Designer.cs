@@ -24,6 +24,7 @@ namespace Battle_boats {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BoatModalForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.boatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,20 +61,20 @@ namespace Battle_boats {
             this.saveToolStripMenuItem,
             this.loadToolStripMenuItem});
             this.boatsToolStripMenuItem.Name = "boatsToolStripMenuItem";
-            this.boatsToolStripMenuItem.Size = new System.Drawing.Size(60, 26);
+            this.boatsToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
             this.boatsToolStripMenuItem.Text = "Boats";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
@@ -167,7 +168,7 @@ namespace Battle_boats {
             // boatAddButton
             // 
             this.boatAddButton.Location = new System.Drawing.Point(615, 54);
-            this.boatAddButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.boatAddButton.Margin = new System.Windows.Forms.Padding(4);
             this.boatAddButton.Name = "boatAddButton";
             this.boatAddButton.Size = new System.Drawing.Size(95, 36);
             this.boatAddButton.TabIndex = 5;
@@ -178,7 +179,7 @@ namespace Battle_boats {
             // setBoatsButton
             // 
             this.setBoatsButton.Location = new System.Drawing.Point(615, 97);
-            this.setBoatsButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.setBoatsButton.Margin = new System.Windows.Forms.Padding(4);
             this.setBoatsButton.Name = "setBoatsButton";
             this.setBoatsButton.Size = new System.Drawing.Size(95, 36);
             this.setBoatsButton.TabIndex = 6;
@@ -189,7 +190,7 @@ namespace Battle_boats {
             // exitButton
             // 
             this.exitButton.Location = new System.Drawing.Point(615, 140);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(4);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(95, 36);
             this.exitButton.TabIndex = 7;
@@ -208,8 +209,9 @@ namespace Battle_boats {
             this.Controls.Add(this.boatLabel);
             this.Controls.Add(this.boatsListDataGrid);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximumSize = new System.Drawing.Size(741, 383);
             this.MinimumSize = new System.Drawing.Size(741, 383);
             this.Name = "BoatModalForm";

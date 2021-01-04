@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,12 +12,15 @@ using System.Windows.Forms;
 namespace Battle_boats {
     class DisplayBoard {
         private readonly BackgroundWorker worker;
+        public bool boardDone = false;
 
-        public DisplayBoard(Action<int, int, Label> setBoard, Action<object, EventArgs> mouseClickEvent, Action<object, EventArgs> mouseEnterEvent, Action<object, EventArgs> mouseLeaveEvent) {            
+        public DisplayBoard(Action<int, int, Label> setBoard, Action<object, EventArgs> mouseClickEvent = null, Action<object, EventArgs> mouseEnterEvent = null, Action<object, EventArgs> mouseLeaveEvent = null, Action setBoatsAfter = null) {            
             worker = new BackgroundWorker();
             worker.WorkerReportsProgress = true;
             worker.DoWork += (sender, e) => displayBoardWork(sender, e, mouseClickEvent,  mouseEnterEvent,  mouseLeaveEvent);
             worker.ProgressChanged += (sender, e) => displayBoardProgressChanged(sender, e, setBoard);
+            if (setBoatsAfter != null)
+                worker.RunWorkerCompleted += (sender, e) => displayBoardWorkDone(sender, e, setBoatsAfter);
         }
 
         public void displayBoard() {
@@ -35,7 +39,7 @@ namespace Battle_boats {
                     labelTemp.Dock = DockStyle.Fill;
                     labelTemp.TextAlign = ContentAlignment.MiddleCenter;
                     labelTemp.AutoSize = false;
-                    labelTemp.Font = new Font("Roboto", 10, FontStyle.Regular);
+                    labelTemp.Font = new Font("Roboto", 10, FontStyle.Bold);
 
                     labelTemp.Margin = new Padding(0);
                     if ((col + row) % 2 == 0) {
@@ -54,9 +58,12 @@ namespace Battle_boats {
                         // col, row and default color
                         labelTemp.Name = $"{col - 1}.{row - 1}.{labelTemp.BackColor.Name}";
 
-                        labelTemp.Click += new EventHandler(mouseClickEvent);
-                        labelTemp.MouseEnter += new EventHandler(mouseEnterEvent);
-                        labelTemp.MouseLeave += new EventHandler(mouseLeaveEvent);
+                        if (mouseClickEvent != null)
+                            labelTemp.Click += new EventHandler(mouseClickEvent);
+                        if (mouseEnterEvent != null)
+                            labelTemp.MouseEnter += new EventHandler(mouseEnterEvent);
+                        if (mouseLeaveEvent != null)
+                            labelTemp.MouseLeave += new EventHandler(mouseLeaveEvent);
 
                     }
                     bgWorker.ReportProgress(1, new Response { col = col, row = row, lbl = labelTemp});
@@ -67,6 +74,10 @@ namespace Battle_boats {
         private void displayBoardProgressChanged(object sender, ProgressChangedEventArgs e, Action<int, int, Label> setBoard) {
             Response response = (Response)e.UserState;
             setBoard(response.col, response.row, response.lbl);
+        }
+
+        private void displayBoardWorkDone(object sender, RunWorkerCompletedEventArgs e, Action setBoatsAction) {
+            setBoatsAction();
         }
 
         struct Response {

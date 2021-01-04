@@ -24,6 +24,7 @@ namespace Battle_boats {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetupBoardForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,21 +109,21 @@ namespace Battle_boats {
             // changeBoatsToolStripMenuItem
             // 
             this.changeBoatsToolStripMenuItem.Name = "changeBoatsToolStripMenuItem";
-            this.changeBoatsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.changeBoatsToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.changeBoatsToolStripMenuItem.Text = "Change boats";
             this.changeBoatsToolStripMenuItem.Click += new System.EventHandler(this.changeBoatsToolStripMenuItem_Click);
             // 
             // saveBoatsToolStripMenuItem
             // 
             this.saveBoatsToolStripMenuItem.Name = "saveBoatsToolStripMenuItem";
-            this.saveBoatsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveBoatsToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.saveBoatsToolStripMenuItem.Text = "Save boats";
             this.saveBoatsToolStripMenuItem.Click += new System.EventHandler(this.saveBoatsToolStripMenuItem_Click);
             // 
             // loadBoatsToolStripMenuItem
             // 
             this.loadBoatsToolStripMenuItem.Name = "loadBoatsToolStripMenuItem";
-            this.loadBoatsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.loadBoatsToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.loadBoatsToolStripMenuItem.Text = "Load boats";
             this.loadBoatsToolStripMenuItem.Click += new System.EventHandler(this.loadBoatsToolStripMenuItem_Click);
             // 
@@ -140,7 +141,7 @@ namespace Battle_boats {
             this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.setupBoardTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.setupBoardTable.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.setupBoardTable.Location = new System.Drawing.Point(0, 25);
             this.setupBoardTable.Margin = new System.Windows.Forms.Padding(0);
@@ -320,7 +321,7 @@ namespace Battle_boats {
             this.tableLayoutPanel1.Controls.Add(this.gameSettingsTabs, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 28);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
@@ -337,7 +338,7 @@ namespace Battle_boats {
             this.boatFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.boatFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.boatFlowPanel.Location = new System.Drawing.Point(4, 4);
-            this.boatFlowPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.boatFlowPanel.Margin = new System.Windows.Forms.Padding(4);
             this.boatFlowPanel.Name = "boatFlowPanel";
             this.boatFlowPanel.Size = new System.Drawing.Size(499, 369);
             this.boatFlowPanel.TabIndex = 0;
@@ -351,7 +352,7 @@ namespace Battle_boats {
             this.boatButtonTable.Controls.Add(this.unselectBoatButton, 0, 3);
             this.boatButtonTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.boatButtonTable.Location = new System.Drawing.Point(511, 415);
-            this.boatButtonTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.boatButtonTable.Margin = new System.Windows.Forms.Padding(4);
             this.boatButtonTable.Name = "boatButtonTable";
             this.boatButtonTable.RowCount = 5;
             this.boatButtonTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
@@ -366,7 +367,7 @@ namespace Battle_boats {
             // 
             this.boatDirectionButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.boatDirectionButton.Location = new System.Drawing.Point(4, 30);
-            this.boatDirectionButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.boatDirectionButton.Margin = new System.Windows.Forms.Padding(4);
             this.boatDirectionButton.Name = "boatDirectionButton";
             this.boatDirectionButton.Size = new System.Drawing.Size(153, 45);
             this.boatDirectionButton.TabIndex = 9;
@@ -378,7 +379,7 @@ namespace Battle_boats {
             // 
             this.unselectBoatButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unselectBoatButton.Location = new System.Drawing.Point(4, 109);
-            this.unselectBoatButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unselectBoatButton.Margin = new System.Windows.Forms.Padding(4);
             this.unselectBoatButton.Name = "unselectBoatButton";
             this.unselectBoatButton.Size = new System.Drawing.Size(153, 45);
             this.unselectBoatButton.TabIndex = 12;
@@ -394,7 +395,7 @@ namespace Battle_boats {
             this.gameSettingsTabs.Controls.Add(this.localTabPage);
             this.gameSettingsTabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gameSettingsTabs.Location = new System.Drawing.Point(511, 4);
-            this.gameSettingsTabs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gameSettingsTabs.Margin = new System.Windows.Forms.Padding(4);
             this.gameSettingsTabs.Name = "gameSettingsTabs";
             this.gameSettingsTabs.SelectedIndex = 0;
             this.gameSettingsTabs.Size = new System.Drawing.Size(330, 369);
@@ -404,9 +405,9 @@ namespace Battle_boats {
             // 
             this.AITabPage.Controls.Add(this.tableLayoutPanel2);
             this.AITabPage.Location = new System.Drawing.Point(4, 25);
-            this.AITabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AITabPage.Margin = new System.Windows.Forms.Padding(4);
             this.AITabPage.Name = "AITabPage";
-            this.AITabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AITabPage.Padding = new System.Windows.Forms.Padding(4);
             this.AITabPage.Size = new System.Drawing.Size(322, 340);
             this.AITabPage.TabIndex = 0;
             this.AITabPage.Text = "AI";
@@ -423,7 +424,7 @@ namespace Battle_boats {
             this.tableLayoutPanel2.Controls.Add(this.easyAIRadio, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 4);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 6;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
@@ -481,10 +482,10 @@ namespace Battle_boats {
             // 
             this.localTabPage.Controls.Add(this.label1);
             this.localTabPage.Location = new System.Drawing.Point(4, 25);
-            this.localTabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.localTabPage.Margin = new System.Windows.Forms.Padding(4);
             this.localTabPage.Name = "localTabPage";
-            this.localTabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.localTabPage.Size = new System.Drawing.Size(323, 340);
+            this.localTabPage.Padding = new System.Windows.Forms.Padding(4);
+            this.localTabPage.Size = new System.Drawing.Size(322, 340);
             this.localTabPage.TabIndex = 1;
             this.localTabPage.Text = "Local";
             this.localTabPage.UseVisualStyleBackColor = true;
@@ -510,6 +511,7 @@ namespace Battle_boats {
             this.ClientSize = new System.Drawing.Size(845, 715);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimumSize = new System.Drawing.Size(861, 752);

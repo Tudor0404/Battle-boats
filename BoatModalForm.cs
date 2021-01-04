@@ -129,9 +129,8 @@ namespace Battle_boats {
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (GameLogic.saveBoats())
-                if (checkBoats())
-                    setupValues();
+            if (checkBoats())
+                GameLogic.saveBoats();
         }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e) {

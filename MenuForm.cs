@@ -29,16 +29,6 @@ namespace Battle_boats {
             this.Hide();
         }
 
-        private void leaderboardButton_Click(object sender, EventArgs e) {
-            // same logic as above
-            var newForm = new leaderboardForm();
-            newForm.Location = this.Location;
-            newForm.StartPosition = FormStartPosition.Manual;
-            newForm.FormClosing += delegate { this.Show(); };
-            newForm.Show();
-            this.Hide();
-        }
-
         private void exitButton_Click(object sender, EventArgs e) {
             // exit program
             System.Windows.Forms.Application.Exit();

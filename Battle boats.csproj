@@ -107,18 +107,6 @@
     <Compile Include="SetupBoardForm.Designer.cs">
       <DependentUpon>SetupBoardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LocalConnectForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LocalConnectForm.Designer.cs">
-      <DependentUpon>LocalConnectForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LeaderboardForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LeaderboardForm.Designer.cs">
-      <DependentUpon>LeaderboardForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BoatModalForm.resx">
@@ -132,12 +120,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SetupBoardForm.resx">
       <DependentUpon>SetupBoardForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LocalConnectForm.resx">
-      <DependentUpon>LocalConnectForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LeaderboardForm.resx">
-      <DependentUpon>LeaderboardForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -15,7 +15,10 @@ using System.IO;
  * DONE -remove boats
  * DONE -enable disable start button depending if the boats are out or not
  * DONE -change boats
- * -save/load boats
+ * DONE -save/load boats
+ * -setup game loop
+ * -all game rules added
+ * -resume/load games
  * */
 
 
@@ -73,6 +76,9 @@ namespace Battle_boats {
             setDataGridStatus();
             boatsListDataGrid.Sort(boatsListDataGrid.Columns[1], ListSortDirection.Descending);
             boatsListDataGrid.ClearSelection();
+            currentBoatIndex = -1;
+            placementStatusLabel.Text = "";
+            unselectBoatButton.Visible = false;
         }
 
         // places boats on the board
@@ -91,11 +97,11 @@ namespace Battle_boats {
                     var tempBoat = GameLogic.possibleBoats[currentBoatIndex];
                     string[] tempString = lbl.Name.Split('.');
                     int[] tempInt = { int.Parse(tempString[0]), int.Parse(tempString[1]) };
-                    tempBoat.mainCoord = new GameLogic.Coords(tempInt[0], tempInt[1]);
+                    tempBoat.mainCoord = new GameLogic.Coordinate(tempInt[0], tempInt[1]);
                     if (boatDirectionButton.Text == "Vertical")
-                        tempBoat.direc = GameLogic.Direction.Vertical;
+                        tempBoat.direc = GameLogic.BoatDirections.Vertical;
                     else
-                        tempBoat.direc = GameLogic.Direction.Horizontal;
+                        tempBoat.direc = GameLogic.BoatDirections.Horizontal;
 
                     if (GameLogic.addBoatCheck(tempBoat, boatsOnBoard)) {
                         // if the boat is good, add it to the list
@@ -104,7 +110,7 @@ namespace Battle_boats {
                         // goes through the length of the boat, and colors in the square next to it depending on the direction
                         for (int i = 0; i < boatsOnBoard[boatsOnBoard.Count - 1].length; i++) {
 
-                            if (boatDirectionButton.Text == GameLogic.Direction.Horizontal.ToString()) {
+                            if (boatDirectionButton.Text == GameLogic.BoatDirections.Horizontal.ToString()) {
 
                                 setupTableLabels[tempInt[0] + i, tempInt[1]].BackColor = GameLogic.possibleBoats[currentBoatIndex].color;
                                 if (GameLogic.possibleBoats[currentBoatIndex].color.Name.ToString().Substring(0, 2) == "ff")
@@ -168,7 +174,7 @@ namespace Battle_boats {
 
                 // goes through the length of the boat, and colors in the square next to it depending on the direction
                 for (int i = 0; i < GameLogic.possibleBoats[currentBoatIndex].length; i++) {
-                    if (boatDirectionButton.Text == GameLogic.Direction.Horizontal.ToString()) {
+                    if (boatDirectionButton.Text == GameLogic.BoatDirections.Horizontal.ToString()) {
 
                         try {
                             setupTableLabels[lblCoords[0] + i, lblCoords[1]].BackColor = GameLogic.possibleBoats[currentBoatIndex].color;
@@ -191,10 +197,10 @@ namespace Battle_boats {
 
         // toggles between directions when pressing the button
         private void boatDirectionButton_Click(object sender, EventArgs e) {
-            if (boatDirectionButton.Text == GameLogic.Direction.Horizontal.ToString()) {
-                boatDirectionButton.Text = GameLogic.Direction.Vertical.ToString();
+            if (boatDirectionButton.Text == GameLogic.BoatDirections.Horizontal.ToString()) {
+                boatDirectionButton.Text = GameLogic.BoatDirections.Vertical.ToString();
             } else {
-                boatDirectionButton.Text = GameLogic.Direction.Horizontal.ToString();
+                boatDirectionButton.Text = GameLogic.BoatDirections.Horizontal.ToString();
             }
         }
 
@@ -302,13 +308,20 @@ namespace Battle_boats {
             } else {
                 gameType = GameLogic.GameTypes.Local;
                 AIDifficulty = GameLogic.AILevels.None;
+                MessageBox.Show("In progress");
+                return;
+            }
+
+            foreach (var boat in boatsOnBoard) {
+                boat.resetSections();
+                Debug.Print($"main coord: {boat.mainCoord}, destroyed: {boat.destroyed}");
             }
 
             // create new form
-            var newForm = new PlayForm(gameType, AIDifficulty);
+            var newForm = new PlayForm(gameType, AIDifficulty, boatsOnBoard);
             newForm.Location = this.Location;
             newForm.StartPosition = FormStartPosition.Manual;
-            newForm.FormClosing += delegate { this.Show(); };
+            newForm.FormClosing += delegate { this.Show(); this.setupValues(); };
             newForm.Show();
             this.Hide();
         }
