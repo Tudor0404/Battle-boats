@@ -15,9 +15,6 @@ using System.Windows.Forms;
  * FIXED error when placing large boats
  * FIXED error when AI starts game
  * 
- * Need to add:
- * saving the game state - (maybe when changing player)
- * allow to load game state
  */
 
 public class GameLogic {
