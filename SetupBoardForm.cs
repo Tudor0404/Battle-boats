@@ -16,9 +16,10 @@ using System.IO;
  * DONE -enable disable start button depending if the boats are out or not
  * DONE -change boats
  * DONE -save/load boats
- * -setup game loop
- * -all game rules added
- * -resume/load games
+ * DONE -setup game loop
+ * DONE -all game rules added
+ * DONE 
+-resume/load games
  * */
 
 
